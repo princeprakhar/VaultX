@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-create a acount Schema
+// create a acount Schema
 const accountSchema = new mongoose.Schema({
     userId: {
         type: Schema.Types.ObjectId,
