@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../root/db');
+const { User, Account } = require('../root/db');
 const zod = require("zod");
 const { authMiddleware } = require('../middleware/authMiddleWare');
 
@@ -25,14 +25,19 @@ router.get("/signup", async (req, res) => {
     if(findUser){
         return res.status(400).json({message : "User already exists"});
     }
-    const newUser = new User.create({
+    const newUser = await User.create({
         username,
         password,
         firstName,
         lastName
     });
+
     await newUser.save();
     const newUserId = await newUser._id;
+
+    await (await Account.create({ userId: newUserId, balance: 0 })).save();
+
+
     const token = jwt.sign({ id: newUserId }, process.env.JWT_SECRET);
 
     res.status(200).json({
