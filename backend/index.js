@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 // Add the rootRouter to the app
-app.use("/api/root", rootRouter);
+app.use("/root", rootRouter);
 
 
 app.listen(4001, () => {  

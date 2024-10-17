@@ -8,7 +8,7 @@ import BottomWarning from './BottomWarning';
 
 const SignIn = () => {
   return <>
-    <div className="bg-slate-500 flex items-center justify-center min-h-screen">
+    <div className="bg-slate-400 flex items-center justify-center min-h-screen">
     <div className="bg-white p-8  shadow-lg w-96 rounded-xl border-black">
       <Header label = "SignIn"/>
       <SubHeader contents="Enter your information to SignIn" />

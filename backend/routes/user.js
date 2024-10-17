@@ -3,6 +3,7 @@ const router = express.Router();
 const { User, Account } = require('../root/db');
 const zod = require("zod");
 const { authMiddleware } = require('../middleware/authMiddleWare');
+const jwt = require('jsonwebtoken');
 
 //define signUpBody to validate
 const signUpBody = zod.object({
@@ -13,7 +14,7 @@ const signUpBody = zod.object({
 });
 
 //signup handler
-router.get("/signup", async (req, res) => {
+router.post("/signup", async (req, res) => {
     const validate = signUpBody.safeParse(req.body);
     if(!validate){
         return res.status(400).json({message : "Invalid input"});
@@ -55,7 +56,7 @@ const signInBody = zod.object({
 });
 
 //signin handler
-router.get("/signin", async (req, res) => { 
+router.post("/signin", async (req, res) => { 
   const validate = signInBody.safeParse(req.body);
   if(!validate){
       return res.status(400).json({message : "Invalid input"});
