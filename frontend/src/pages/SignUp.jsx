@@ -26,8 +26,8 @@ const SignUp = () => {
         firstName,
         lastName
       });
-      localStorage.setItem('token', response.data.token);
-      navigate('/dashboard');
+      toast.success('User created successfully. Please login to continue.');
+      navigate('/signin');
     } catch (error) {
       if (error.response) {
         switch (error.response.status) {
