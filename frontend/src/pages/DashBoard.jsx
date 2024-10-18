@@ -1,7 +1,7 @@
 import React from 'react';
-import AppBar from './AppBar';
-import Balance from './Balance';
-import UserDetails from './UserDetails';
+import AppBar from '@/components/AppBar';
+import Balance from '@/components/Balance';
+import UserDetails from '@/components/UserDetails';
 
 const DashBoard = ()=>{
     return(

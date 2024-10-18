@@ -16,7 +16,7 @@ const signUpBody = zod.object({
 //signup handler
 router.post("/signup", async (req, res) => {
     const validate = signUpBody.safeParse(req.body);
-    if(!validate){
+    if(!validate.success){
         return res.status(400).json({message : "Invalid input"});
     }
 
@@ -24,7 +24,7 @@ router.post("/signup", async (req, res) => {
     const { username, password, firstName, lastName } = req.body;
     const findUser = await User.findOne({ username });
     if(findUser){
-        return res.status(400).json({message : "User already exists"});
+        return res.status(401).json({message : "User already exists"});
     }
     const newUser = await User.create({
         username,

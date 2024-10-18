@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from './Header';
-import SubHeader from './SubHeader';
-import InputHandler from './InputHandler';
+import Header from '@/components/Header';
+import SubHeader from '@/components/SubHeader';
+import InputHandler from '@/components/InputHandler';
 import {Button} from '@/components/ui/button';
-import BottomWarning from './BottomWarning';
+import BottomWarning from '@/components/BottomWarning';
 
 
 const SignIn = () => {
