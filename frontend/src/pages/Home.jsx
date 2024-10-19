@@ -3,7 +3,10 @@ import HeroSection from '@/components/HeroSection';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const Layout = ({ children }) => {
+const Home = ({ children }) => {
+
+
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -17,4 +20,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default Home;

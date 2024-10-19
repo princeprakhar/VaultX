@@ -40,7 +40,7 @@ const UserDetails = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="space-y-5 mt-7 ">
+      <div className="space-y-5 mt-7 mb-8">
         {filteredUsers.map(user => (
           <User key={user._id} user={user} />
         ))}
