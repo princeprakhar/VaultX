@@ -1,4 +1,5 @@
-import { Home, Send, Wallet, User } from "lucide-react";
+import React from "react";
+import { Home, Send, Wallet, User, Github } from "lucide-react";
 import NavItem from "./NavItem";
 const Navbar = () => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -29,6 +30,7 @@ const Navbar = () => {
                     icon: User,
                     href: isAuthenticated ? "/dashboard" : "/signin",
                   },
+                  { name: "GitHub", icon: Github, href: "https://github.com/princeprakhar/VaultX.git" },
                 ].map((item) => (
                   <NavItem key={item.name} {...item} />
                 ))}
