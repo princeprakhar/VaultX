@@ -10,7 +10,7 @@ const AppBar = () => {
   const navItems = [
     { name: 'Home', icon: Home, href: '/' },
     { name: 'Send', icon: Send, href: '/send' },
-    { name: isAuthenticated ? name : "Profile", icon: User, href: isAuthenticated ? '/dashboard' : '/signin' },
+    { name: isAuthenticated ? "Profile" : "Signin", icon: User, href: isAuthenticated ? '/dashboard' : '/signin' },
     { name: "GitHub", icon: Github, href: "https://github.com/princeprakhar/VaultX.git" },
   ];
 
