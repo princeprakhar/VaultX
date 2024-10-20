@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-const User = ({ user }) => {
+const User = ({ user , handleInitiatedTansfer }) => {
   return (
     <div className="flex justify-between items-center ">
       <div className="flex items-center">
@@ -13,7 +13,7 @@ const User = ({ user }) => {
         </div>
       </div>
       <div>
-        <Button className="bg-slate-700 rounded-xl text-white hover:bg-slate-400">Send Money</Button>
+        <Button onClick={handleInitiatedTansfer} className="bg-slate-700 rounded-xl text-white hover:bg-slate-400">Send Money</Button>
       </div>
     </div>
   );

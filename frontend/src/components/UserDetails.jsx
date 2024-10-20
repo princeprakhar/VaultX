@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import User from "./User";
 
 const UserDetails = () => {
@@ -19,12 +20,17 @@ const UserDetails = () => {
       _id: 3
     }
   ]);
+  const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredUsers = users.filter(user =>
     `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
+  const handleInitiatedTansfer = () => {
+    navigate("/send");
+  }
 
   return (
     <div className="container mx-4 px-1 ">
@@ -42,7 +48,7 @@ const UserDetails = () => {
       </div>
       <div className="space-y-5 mt-7 mb-8">
         {filteredUsers.map(user => (
-          <User key={user._id} user={user} />
+          <User key={user._id} user={user}  handleInitiatedTansfer={handleInitiatedTansfer}/>
         ))}
       </div>
     </div>
