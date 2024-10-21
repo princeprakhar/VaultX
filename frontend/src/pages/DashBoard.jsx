@@ -5,6 +5,7 @@ import UserDetails from '@/components/UserDetails';
 import Footer from '@/components/Footer';
 
 const DashBoard = ()=>{
+    console.log(localStorage.getItem('token'));
     return(
         <>
         <div>

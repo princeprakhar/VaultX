@@ -15,7 +15,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashBoard />} />
           </Route>
-          <Route path="/send" element={<SendMoney />} />
+          <Route path="/send" element={<SendMoney name="" />} />
           <Route path={"/" || "/home"} element={<Home />} />
         </Routes>
       </BrowserRouter>
