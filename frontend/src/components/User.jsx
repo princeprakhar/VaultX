@@ -1,7 +1,15 @@
 import { Button } from "./ui/button";
-const User = ({ user , handleInitiatedTansfer }) => {
+import { useNavigate } from "react-router-dom";
+
+const User = ({ user }) => {
+  const navigate = useNavigate();
+  
+  const handleInitiatedTransfer = () => {
+    navigate(`/send?id=${user._id}&name=${user.firstName}`);
+  };
+
   return (
-    <div className="flex justify-between items-center ">
+    <div className="flex justify-between items-center">
       <div className="flex items-center">
         <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center mr-2">
           <div className="text-xl">
@@ -13,9 +21,15 @@ const User = ({ user , handleInitiatedTansfer }) => {
         </div>
       </div>
       <div>
-        <Button onClick={handleInitiatedTansfer} className="bg-slate-700 rounded-xl text-white hover:bg-slate-400">Send Money</Button>
+        <Button 
+          onClick={handleInitiatedTransfer} 
+          className="bg-slate-700 rounded-xl text-white hover:bg-slate-400"
+        >
+          Send Money
+        </Button>
       </div>
     </div>
   );
 };
+
 export default User;
