@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom"; // Added useNavigate
+import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "@/components/Header";
 import Friend from "@/components/Friend";
-import MoneySendInputHandler from "@/components/MoneySendInputHandler";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
+import toast from 'react-hot-toast';
 import Footer from "@/components/Footer";
 
 const SendMoney = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const id = searchParams.get("id");
   const name = searchParams.get("name");
   const [amount, setAmount] = useState("");
   const [receiverEmail, setReceiverEmail] = useState("");
@@ -33,28 +32,23 @@ const SendMoney = () => {
     try {
       const response = await axios.post(
         "http://localhost:4001/root/account/transfer",
-        {
-          amount: Number(amount),
-          receiverEmail: receiverEmail,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        { amount: Number(amount), receiverEmail },
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
+      console.log("Transfer response:", response); 
 
-      if (response.data.success) {
+      if (response.status === 200) {
         setSuccess(true);
-        // Optional: Clear fields after success
+        toast.success("Transfer successful! Redirecting...");
         setAmount("");
         setReceiverEmail("");
-        // Optional: Redirect after success
         setTimeout(() => {
           navigate('/dashboard');
-        }, 2000);
+        }, 4000);
       }
     } catch (error) {
+      toast.error("Transfer failed. Please try again.");
+      setSuccess(false);
       setError(error.response?.data?.message || "Transfer failed. Please try again.");
       console.error("Transfer failed:", error);
     } finally {
@@ -62,9 +56,7 @@ const SendMoney = () => {
     }
   };
 
-  const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   return (
     <>
@@ -77,9 +69,7 @@ const SendMoney = () => {
             </div>
             <div className="px-6 py-8 space-y-6">
               {name && <Friend name={name} />}
-              
               <div className="space-y-4">
-                {/* Always show email input as it's required by the backend */}
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">
                     Receiver's Email
@@ -96,7 +86,6 @@ const SendMoney = () => {
                     required
                   />
                 </div>
-
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700">
                     Amount (in Rs)
@@ -114,19 +103,14 @@ const SendMoney = () => {
                     required
                   />
                 </div>
-
                 {error && (
-                  <div className="text-red-500 text-sm text-center">
-                    {error}
-                  </div>
+                  <div className="text-red-500 text-sm text-center">{error}</div>
                 )}
-
                 {success && (
                   <div className="text-green-500 text-sm text-center">
                     Transfer successful! Redirecting...
                   </div>
                 )}
-
                 <Button 
                   onClick={handleInitiatedTransfer} 
                   disabled={!receiverEmail || !amount || !isValidEmail(receiverEmail) || isLoading}

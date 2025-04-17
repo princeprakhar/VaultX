@@ -1,7 +1,7 @@
 const express = require('express');
-const { authMiddleware } = require('../middleware/authMiddleWare'); // Ensure the correct path
+const { authMiddleware } = require('../middleware/authMiddleWare');
 const mongoose = require('mongoose');
-const { User, Account } = require('../root/db'); // Adjust according to your project structure
+const { User, Account } = require('../root/db');
 const router = express.Router();
 
 router.use(express.json());
@@ -16,18 +16,19 @@ router.get("/balance", authMiddleware, async (req, res) => {
 
         res.status(200).json({ balance: account.balance });
     } catch (error) {
-        console.error("Error fetching balance:", error); // Log error for debugging
+        console.error("Error fetching balance:", error);
         res.status(500).json({ message: "Internal server error", error: error.message });
     }
 });
-
 
 router.post("/transfer", authMiddleware, async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
 
-    const { amount, receiverEmail } = req.body;
+    let { amount, receiverEmail } = req.body;
     const sender = req.userId;
+    // Ensure the amount is a number
+    amount = Number(amount);
 
     try {
         const findSenderAccount = await Account.findOne({ userId: sender }).session(session);
@@ -51,7 +52,6 @@ router.post("/transfer", authMiddleware, async (req, res) => {
         await Account.updateOne({ userId: sender }, { $inc: { balance: -amount } }).session(session);
         await Account.updateOne({ userId: receiverUser._id }, { $inc: { balance: amount } }).session(session);
 
-        // Commit the transaction
         await session.commitTransaction();
         res.status(200).json({ message: "Transfer successful" });
     } catch (error) {
@@ -62,6 +62,5 @@ router.post("/transfer", authMiddleware, async (req, res) => {
         session.endSession();
     }
 });
-
 
 module.exports = router;

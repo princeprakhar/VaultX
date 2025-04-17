@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import BottomWarning from "@/components/BottomWarning";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import Navabar from "@/components/Navbar";
+import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const SignUp = () => {
@@ -51,7 +51,7 @@ const SignUp = () => {
 
   return (
     <>
-      <Navabar />
+      <Navbar />
       <div className="bg-slate-400 shadow-md border rounded-xl m-1 flex items-center justify-center min-h-screen">
         <div className="bg-white p-8 rounded-xl shadow-lg w-96">
           <Header label="Sign Up" />

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";  // Added useEffect import
-import axios from "axios";  // Added axios import
+import { useState, useEffect } from "react";
+import axios from "axios";
 import User from "./User";
 
 const UserDetails = () => {
@@ -7,9 +7,9 @@ const UserDetails = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/root/user/all?filter=${filter}`)
+    axios.get(`http://localhost:4001/root/user/all?filter=${filter}`)
       .then(response => {
-        setUsers(response.data.user)
+        setUsers(response.data.users);
       })
       .catch(error => {
         console.error("Error fetching users:", error);
@@ -18,9 +18,7 @@ const UserDetails = () => {
 
   return (
     <div className="container mx-4 px-1">
-      <div className="font-bold text-4xl mt-6">
-        Users
-      </div>
+      <div className="font-bold text-4xl mt-6">Users</div>
       <div className="my-2">
         <input 
           type="text" 

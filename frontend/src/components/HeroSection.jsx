@@ -30,7 +30,8 @@ const HeroSection = () => {
           </span>
         </h1>
         <p className="text-xl sm:text-2xl text-white mb-8">
-          Secure your digital assets with cutting-edge blockchain technology.
+          Transform the way you send and receive money with VaultX. Enjoy bank-level security,
+          lightning-fast transfers, and innovative features designed to make every transaction seamless.
         </p>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           {isAuthenticated ? (
@@ -61,7 +62,7 @@ const HeroSection = () => {
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h3 className="text-lg font-semibold mb-2">What is VaultX?</h3>
-        <p className="mb-4">VaultX is a cutting-edge finicial .</p>
+        <p className="mb-4">VaultX is a cutting-edge financial technology platform that secures and simplifies your money transfers.</p>
         <h3 className="text-lg font-semibold mb-2">Key Features:</h3>
         <ul className="list-disc list-inside mb-4">
           <li>Military-grade encryption for all transactions</li>
@@ -69,9 +70,7 @@ const HeroSection = () => {
           <li>Seamless integration with major exchanges</li>
         </ul>
         <p className="mb-4">
-          Whether you're a seasoned investor or just starting out, VaultX
-          provides the tools and security you need to navigate the world of
-          digital assets with confidence.
+          Whether you're a seasoned investor or just starting out, VaultX provides the tools and security you need to navigate the world of digital assets with confidence.
         </p>
         <button
           onClick={() => setIsModalOpen(false)}

@@ -5,22 +5,26 @@ import SendMoney from "@/pages/SendMoney";
 import SignIn from "@/pages/SignIn";
 import SignUp from "@/pages/SignUp";
 import DashBoard from "@/pages/DashBoard";
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
-    <div>
+    <>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashBoard />} />
           </Route>
-          <Route path="/send" element={<SendMoney name="" />} />
-          <Route path={"/" || "/home"} element={<Home />} />
+          <Route path="/send" element={<SendMoney />} />
         </Routes>
       </BrowserRouter>
-    </div>
+      <Toaster position="top-right" />
+    </>
   );
 }
 
 export default App;
+
